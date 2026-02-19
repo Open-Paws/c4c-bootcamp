@@ -89,13 +89,16 @@ Each example has a **vague** version and a **detailed** version. Try both and co
 5. **Mention the visual style.** Even a few words ("clean and minimal", "dark mode", "warm earth tones") dramatically change the output.
 6. **State what you DON'T need.** "No images needed," "no authentication," "everything client-side" prevents the AI from overbuilding.
 
-## The Limits
+## From Vibes to Structure
 
-Vibe coding is powerful for prototyping. It is not how you build production tools. Notice:
+The prompts above already show the pattern: more detail up front = better results. But even the "detailed" prompts here are just scratching the surface. When you want to build something real — something reliable, something an organisation can depend on — you need to do more work *before* you ever ask the AI to generate code.
 
-- You can't easily debug what you can't read
-- The AI makes assumptions you didn't intend
-- You have no idea if the generated code is secure, accessible, or efficient
-- Iterating past 3-4 prompts usually makes things worse, not better
+That's what we mean by **structured vibe coding**:
 
-That's why we teach you to actually code. Vibe coding shows you what's *possible* — coding skills let you build what's *reliable*.
+- **Write a project brief first.** A short document describing what you're building, who it's for, and what "done" looks like. Feed this to the AI as context.
+- **Define your requirements.** Before generating anything, write out what the tool should do in specific, testable statements: "When the user pastes an ingredient list containing 'casein,' the word should be highlighted in red."
+- **Write tests before code.** Describe the expected behaviour in plain language or simple test cases. Give these to the AI alongside your prompt so it has something to build *toward*.
+- **Build in small pieces.** Instead of one massive prompt, break the project into components. Generate one piece, verify it works, then move to the next.
+- **Keep a living spec.** As you iterate, update your documentation rather than stacking prompts on top of prompts. The AI works better with a clear, current document than a long chat history.
+
+You don't need to learn to code to do any of this. You need to learn to **think structurally** about what you're building — and that's what the rest of this course teaches you.
