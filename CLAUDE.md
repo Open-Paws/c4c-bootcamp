@@ -38,6 +38,15 @@ module-2/                        # Coding Foundations module
 | `module-2/vibe-coding-demo/demo-script.md` | Reproducible vibe coding demo |
 | `.gitmodules` | Submodule references |
 
+## Agent Context Files
+
+| File | What It Documents |
+|------|------------------|
+| `module-2/CLAUDE.md` | Module 2 overview — learning arc, subdirectory index, API table |
+| `module-2/notebooks/CLAUDE.md` | Per-notebook summaries with APIs, libraries, and key concepts |
+| `module-2/project-pitches/CLAUDE.md` | File inventory, workflow steps, instructor notes |
+| `module-2/vibe-coding-demo/CLAUDE.md` | Demo script contents, session flow, pedagogical purpose |
+
 ## Development
 
 - **Tech stack:** Python 3, Google Colab, OpenRouter, OpenFoodFacts API, Our World in Data
