@@ -62,15 +62,34 @@ This is the teaching content that turns developers into advocacy technologists. 
 
 **Settled decisions affecting this repo:**
 - **2026-04-02: Bootcamp identity framing** — Month 1 introduces advocacy context through real APIs (FAO slaughter data, OpenFoodFacts) and the ubiquitous language dictionary framed as practical communication. No explicit liberation rhetoric in early modules. Liberation framing develops through the work.
+- **2026-04-09: Identity framing — immersion model** — Recruitment uses systems framing ("animal agriculture is an engineering problem"), never liberation language at the door. Identity shift is designed as a deliberate journey in Month 2 through proof-of-impact case studies. Explicit liberation framing appears after immersion in the work, not before.
 - **2026-04-02: Graze-CLI architecture** — Graze-CLI will integrate as a CLAUDE.md template / Claude Code extension. Do NOT write it into curriculum until it has been smoke-tested on a non-core-team machine.
 - **2026-03-25: Graze-CLI needs smoke test before curriculum** — Sam coordinates; bootcamp launch is not blocked by this.
 
 **Relevant strategy documents:**
 - `programs/developer-training-pipeline/guild/operations.md` — full Guild pipeline
+- `programs/developer-training-pipeline/guild/tutorial-quests.md` — all 5 tutorial quests (DONE 2026-04-09); use these as reference for curriculum-quest alignment
 - `programs/developer-training-pipeline/india-community/community-strategy.md` — May 2026 India launch
+- `programs/developer-training-pipeline/india-community/context.md` — India-specific build implications (dairy framing, caste tone, Hindutva firewall, economic framing)
 - `ecosystem/repos.md` — `structured-coding-with-ai` should be referenced in bootcamp curriculum
 
-**Current status:** Active. Tutorial quest content due 2 weeks before May 2026 launch (Abid owns). Bootcamp launch is not blocked by Graze-CLI smoke test — those are parallel tracks.
+**Current status (as of 2026-04-09):**
+
+- **Tutorial quests: DONE.** All 5 written in `programs/developer-training-pipeline/guild/tutorial-quests.md`. Curriculum should reference these quests as the post-bootcamp on-ramp — students know what's waiting for them.
+- **LMS content for May cohort: UNASSIGNED — this is a blocker.** The bootcamp notebooks exist but the LMS course content (modules, lessons, quizzes on campus) has no assigned author. Nothing else about May launch matters if developers arrive and there is nothing to do. Assign LMS content owner by April 15 or escalate immediately.
+- **Graze-CLI: NOT in curriculum yet.** Smoke test on a non-core-team machine is required. Do not add Graze-CLI references to any notebook or teaching material until the smoke test passes.
+- **No-animal-violence VS Code extension + pre-commit hook: NOT yet in curriculum.** These are not introduced in the bootcamp until a curriculum decision is made.
+- Bootcamp launch is not blocked by Graze-CLI smoke test — those are parallel tracks.
+
+## India-Specific Curriculum Framing
+
+The May 2026 cohort (Bengaluru + Mumbai) requires India-aware framing throughout the materials. Key principles from `programs/developer-training-pipeline/india-community/context.md`:
+
+1. **Dairy is the primary entry point, not meat.** Platform framing, quest brief impact lines, and onboarding content should center dairy industry exploitation. "You already believe in ahimsa. Here's what dairy actually requires." Do not default to generic factory farming framing.
+2. **Economic framing unlocks Tier-2/3 developers.** For first-generation earners carrying family financial pressure, "meaningful AND paid" is the only pitch that works. The bootcamp pitch must make concrete that Guild quest work is a paid marketplace students enter immediately after completing the bootcamp — not a vague future possibility.
+3. **Burnout is the emotional hook, not exploitation facts.** 83% burnout, stagnant wages, AI displacement anxiety. "You're burning out optimizing systems that exploit animals. Here's work that means something." This lands before the cause framing does.
+4. **Anti-caste tone is a design-level principle.** No standalone disclaimer. Ambedkarite language throughout — systems, power, collective refusal — not upper-caste moralizing. This prevents alienating Dalit developers.
+5. **No Hinduism-specific language in platform UX.** Universal framing on all animal welfare references. Kailash flags day-to-day; Sam has final sign-off.
 
 ## Development Standards
 
