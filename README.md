@@ -9,6 +9,7 @@
 # C4C Bootcamp
 
 [![Status](https://img.shields.io/badge/status-active%20development-yellow)](https://github.com/Open-Paws/c4c-bootcamp)
+[![desloppify score](https://img.shields.io/badge/desloppify-0.0%2F100-red)](scorecard.png)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Open Paws](https://img.shields.io/badge/Open%20Paws-ecosystem-green)](https://openpaws.ai)
 [![no-animal-violence](https://img.shields.io/badge/language-no--animal--violence-brightgreen)](https://github.com/Open-Paws/no-animal-violence)
