@@ -1,0 +1,130 @@
+version: 1
+interaction: pipeline
+
+personas:
+  - id: student-data
+    name: Bootcamp Student — Data Notebook
+    role: First-time developer running the data exploration notebook
+    description: A bootcamp student opening Notebook 1 for the first time, executing all cells to explore FAO farmed animal slaughter data and produce matplotlib charts.
+    environment:
+      runtime: python3
+      os: linux
+    flows:
+      - id: install-deps
+        name: Install notebook dependencies
+        steps:
+          - run: "pip install jupyter matplotlib requests nbconvert nbformat"
+        expected_outcome: All packages install without errors
+      - id: run-notebook-1
+        name: Execute data exploration notebook end-to-end
+        steps:
+          - run: "jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=120 module-2/notebooks/module-2-1-task-coding-demo.ipynb --output /tmp/nb1-executed.ipynb"
+        expected_outcome: Notebook executes all cells without errors; output notebook written to /tmp/nb1-executed.ipynb
+    assertions:
+      succeeds:
+        - "jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=120 module-2/notebooks/module-2-1-task-coding-demo.ipynb --output /tmp/nb1-check.ipynb"
+      output_not_contains:
+        - "Traceback"
+        - "ERROR"
+        - "ModuleNotFoundError"
+
+  - id: student-api
+    name: Bootcamp Student — API Exercise Notebook
+    role: Developer learning REST APIs and JSON parsing
+    description: A bootcamp student working through Notebook 2, making HTTP requests to OpenFoodFacts and parsing JSON responses.
+    environment:
+      runtime: python3
+      os: linux
+    flows:
+      - id: run-notebook-2
+        name: Execute API exercise notebook end-to-end
+        steps:
+          - run: "pip install jupyter requests nbconvert nbformat 2>/dev/null; jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=120 module-2/notebooks/module-2-2-api-exercise.ipynb --output /tmp/nb2-executed.ipynb"
+        expected_outcome: Notebook executes all cells; HTTP requests succeed and JSON is parsed correctly
+    assertions:
+      succeeds:
+        - "python3 -c \"import nbformat; nb = nbformat.read('module-2/notebooks/module-2-2-api-exercise.ipynb', as_version=4); assert len(nb.cells) > 0\""
+      output_not_contains:
+        - "Traceback"
+        - "SyntaxError"
+        - "ModuleNotFoundError"
+
+  - id: student-llm
+    name: Bootcamp Student — AI for Advocacy Notebook
+    role: Developer learning LLM API calls and token economics
+    description: A bootcamp student opening Notebook 3, verifying notebook structure and that cells are well-formed before running with an API key.
+    environment:
+      runtime: python3
+      os: linux
+    flows:
+      - id: validate-notebook-3-structure
+        name: Validate notebook 3 is well-formed and has expected content
+        steps:
+          - run: "python3 -c \"import nbformat, sys; nb = nbformat.read('module-2/notebooks/module-2-3-openrouter-ai-for-advocacy.ipynb', as_version=4); cells = nb.cells; assert len(cells) >= 5, f'Expected at least 5 cells, got {len(cells)}'; sources = ' '.join(c.source for c in cells); assert 'openrouter' in sources.lower(), 'OpenRouter not referenced in notebook'; print('OK:', len(cells), 'cells found')\""
+        expected_outcome: Notebook is valid JSON, has at least 5 cells, and references OpenRouter
+    assertions:
+      succeeds:
+        - "python3 -c \"import nbformat; nb = nbformat.read('module-2/notebooks/module-2-3-openrouter-ai-for-advocacy.ipynb', as_version=4); print('cells:', len(nb.cells))\""
+      output_not_contains:
+        - "Traceback"
+        - "JSONDecodeError"
+
+  - id: instructor
+    name: Bootcamp Instructor
+    role: Instructor verifying all notebooks are valid and the repo is in teachable state
+    description: An instructor doing a pre-class check that all notebooks parse correctly, have no hardcoded API keys, and the project-pitches directory is intact.
+    environment:
+      runtime: python3
+      os: linux
+    flows:
+      - id: validate-all-notebooks
+        name: Parse and validate all three notebooks
+        steps:
+          - run: |
+              python3 - <<'PYEOF'
+              import nbformat, os, sys, re
+              errors = []
+              notebooks = [
+                  'module-2-1-task-coding-demo.ipynb',
+                  'module-2-2-api-exercise.ipynb',
+                  'module-2-3-openrouter-ai-for-advocacy.ipynb',
+              ]
+              for fname in notebooks:
+                  path = os.path.join('module-2', 'notebooks', fname)
+                  try:
+                      nb = nbformat.read(path, as_version=4)
+                      src = ' '.join(c.source for c in nb.cells)
+                      if re.search(r'sk-[A-Za-z0-9]{20,}', src):
+                          errors.append(fname + ': possible hardcoded API key found')
+                      print('OK', fname, len(nb.cells), 'cells')
+                  except Exception as e:
+                      errors.append(fname + ': ' + str(e))
+              if errors:
+                  for e in errors:
+                      print('FAIL', e, file=sys.stderr)
+                  sys.exit(1)
+              PYEOF
+        expected_outcome: All three notebooks parse successfully with no hardcoded API keys detected
+      - id: check-pitches-directory
+        name: Verify project-pitches directory structure exists
+        steps:
+          - run: |
+              python3 - <<'PYEOF'
+              import os, sys
+              required = [
+                  'module-2/project-pitches/CONTRIBUTING.md',
+                  'module-2/project-pitches/README.md',
+              ]
+              missing = [f for f in required if not os.path.exists(f)]
+              if missing:
+                  print('Missing:', missing)
+                  sys.exit(1)
+              print('OK all files present')
+              PYEOF
+        expected_outcome: CONTRIBUTING.md and README.md both exist in project-pitches
+    assertions:
+      succeeds:
+        - "python3 -c \"import nbformat; [nbformat.read(f'module-2/notebooks/{n}', as_version=4) for n in ['module-2-1-task-coding-demo.ipynb','module-2-2-api-exercise.ipynb','module-2-3-openrouter-ai-for-advocacy.ipynb']]; print('all notebooks valid')\""
+      output_not_contains:
+        - "Traceback"
+        - "FAIL"
