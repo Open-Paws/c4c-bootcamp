@@ -15,7 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: No Animal Violence (advisory - fail-on-findings=false)
+      - name: No Animal Violence (advisory - continue-on-error)
         uses: Open-Paws/no-animal-violence-action@main
-        with:
-          fail-on-findings: false
+        continue-on-error: true
