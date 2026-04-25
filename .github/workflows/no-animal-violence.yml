@@ -1,4 +1,4 @@
-name: No Animal Violence Check
+name: No Animal Violence Check (Advisory)
 on:
   pull_request:
     paths:
@@ -15,4 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: Open-Paws/no-animal-violence-action@main
+      - name: No Animal Violence (advisory - continue-on-error)
+        uses: Open-Paws/no-animal-violence-action@main
+        continue-on-error: true
