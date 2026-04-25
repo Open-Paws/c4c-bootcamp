@@ -41,11 +41,10 @@ jobs:
       - name: Run quality gate
         run: |
           SCAN_OUTPUT=$(desloppify scan --path . --profile ci --no-badge 2>&1)
-ISSUE_CHECK=$(echo "${SCAN_OUTPUT}" | grep -q "0 issues" && echo clean || echo issues)
-if [ "$ISSUE_CHECK" = "clean" ]; then
-  echo "PASS: Clean scan - 0 issues detected."
-  exit 0
-fi
+          if echo "${SCAN_OUTPUT}" | grep -q "0 issues"; then
+            echo "PASS: Clean scan - 0 issues detected."
+            exit 0
+          fi
           echo "${SCAN_OUTPUT}"
           SCORE=$(echo "${SCAN_OUTPUT}" | grep -oP 'objective \K[\d.]+(?=/100)')
           if [ -z "${SCORE}" ]; then
