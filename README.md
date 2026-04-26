@@ -3,7 +3,7 @@
   project_status: active-development
   difficulty: beginner-intermediate
   skill_tags: python, jupyter, llm-apis, rest-apis, data-visualisation, git-workflow
-  related_repos: platform, graze-cli, structured-coding-with-ai, gary
+  related_repos: platform, structured-coding-with-ai
 -->
 
 # C4C Bootcamp
